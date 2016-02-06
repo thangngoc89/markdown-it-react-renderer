@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "lodash": "^4.2.1",
-    "markdown-it": "^4.2.1"
+    "markdown-it": "^5.1.0"
   },
   "devDependencies": {
     "babel-cli": "^6.4.5",
@@ -19,24 +19,24 @@
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
     "babel-preset-stage-1": "^6.3.13",
-    "chai": "^2.3.0",
+    "chai": "^3.5.0",
     "eslint": "^1.10.3",
-    "eslint-config-standard": "^4.4.0",
-    "eslint-config-standard-react": "^1.2.1",
+    "eslint-config-standard": "^5.0.0",
+    "eslint-config-standard-react": "^2.1.0",
     "eslint-plugin-react": "^3.16.1",
     "eslint-plugin-standard": "^1.3.1",
     "json-loader": "^0.5.1",
     "markdown-it-abbr": "^1.0.0",
-    "markdown-it-container": "^1.0.0",
-    "markdown-it-deflist": "^1.0.0",
+    "markdown-it-container": "^2.0.0",
+    "markdown-it-deflist": "^2.0.0",
     "markdown-it-emoji": "^1.0.0",
-    "markdown-it-footnote": "^1.0.0",
-    "markdown-it-ins": "^1.0.0",
-    "markdown-it-mark": "^1.0.0",
+    "markdown-it-footnote": "^2.0.0",
+    "markdown-it-ins": "^2.0.0",
+    "markdown-it-mark": "^2.0.0",
     "markdown-it-sub": "^1.0.0",
     "markdown-it-sup": "^1.0.0",
     "mocha": "^2.2.4",
-    "react": "^0.13.3",
+    "react": "^0.14.7",
     "webpack": "^1.8.11"
   },
   "peerDependencies": {
