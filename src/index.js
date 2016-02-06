@@ -2,15 +2,14 @@
 
 import markdown from 'markdown-it';
 import React, { PropTypes, Component } from 'react';
-import isPlainObject from 'lodash/lang/isPlainObject';
-import assign from 'lodash/object/assign';
-import reduce from 'lodash/collection/reduce';
-import zipObject from 'lodash/array/zipObject';
-import sortBy from 'lodash/collection/sortBy';
-import compact from 'lodash/array/compact';
-import camelCase from 'lodash/string/camelCase';
-import isString from 'lodash/lang/isString';
-
+import isPlainObject from 'lodash/isPlainObject';
+import assign from 'lodash/assign';
+import reduce from 'lodash/reduce';
+import sortBy from 'lodash/sortBy';
+import compact from 'lodash/compact';
+import camelCase from 'lodash/camelCase';
+import isString from 'lodash/isString';
+import fromPairs from 'lodash/fromPairs';
 
 const DEFAULT_TAGS = {
   'html': 'span'
@@ -95,7 +94,7 @@ function convertTree(tokens, convertRules, options) {
 
     let token = tkns.shift();
     while (token && token.nesting !== -1) {
-      const attrs = token.attrs && zipObject(sortBy(token.attrs, 0));
+      const attrs = token.attrs && fromPairs(sortBy(token.attrs));
       const children = token.children && convertBranch(token.children.slice(), true);
       const rule = convertRules[camelCase(token.type)] || convertRules.default;
 
