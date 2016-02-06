@@ -181,7 +181,7 @@ class MDReactComponent extends Component {
     convertRules: PropTypes.object,
     plugins: PropTypes.array,
     className: PropTypes.string
-  }
+  };
 
   render() {
     const { text, ...props } = this.props;
