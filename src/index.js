@@ -136,7 +136,8 @@ function mdReactFactory (options = {}) {
   )
 
   function renderChildren (tag) {
-    return tag !== 'img'
+    const voidTags = ['img', 'hr', 'br']
+    return (voidTags.indexOf(tag) === -1)
   }
 
   function iterateTree (tree, level = 0, index = 0) {

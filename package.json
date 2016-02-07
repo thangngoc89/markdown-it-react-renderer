@@ -1,6 +1,6 @@
 {
   "name": "markdown-it-react-renderer",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "React renderer for Markdown-it",
   "main": "lib/index.js",
   "scripts": {
@@ -14,7 +14,8 @@
     "prepublish": "npm run build && npm run dist",
     "preversion": "npm test",
     "version": "npm run build && npm run dist && git add -A .",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags",
+    "release": "npmpub"
   },
   "directories": {
     "example": "examples",
@@ -51,6 +52,7 @@
     "markdown-it-sub": "^1.0.0",
     "markdown-it-sup": "^1.0.0",
     "mocha": "^2.4.5",
+    "npmpub": "^3.0.1",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "webpack": "^1.8.11"

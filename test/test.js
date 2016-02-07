@@ -58,6 +58,13 @@ describe('Markdown tests', () => {
     )
   })
 
+  it('should not throw warning with void tags', () => {
+    assert.equal(
+      render('# Title\n---'),
+      '<span><h1>Title</h1><hr/></span>'
+    )
+  })
+
   it('should work with headers', () => {
     assert.equal(
       render('# This is an <h1> tag\n## This is an <h2> tag\n###### This is an <h6> tag'),
