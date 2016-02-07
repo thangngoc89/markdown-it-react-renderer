@@ -3,7 +3,8 @@
 import { assert } from 'chai'
 import { describe, it } from 'mocha'
 import { mdReact } from '../src/index'
-import React, { renderToStaticMarkup } from 'react'
+import React from 'react'
+import { renderToStaticMarkup } from 'react-dom/server'
 import update from 'react/lib/update'
 
 const plugins = {
@@ -43,6 +44,20 @@ function firstLevelCallback (tag, props, children, level) {
 }
 
 describe('Markdown tests', () => {
+  it('should set root element class to value in className property', () => {
+    assert.equal(
+      render('some text', { className: 'test-class' }),
+      '<span class="test-class"><p>some text</p></span>'
+    )
+  })
+
+  it('should set root element inline style to styles provided in style property', () => {
+    assert.equal(
+      render('some text', { style: { color: 'red', fontSize: 20 } }),
+      '<span style="color:red;font-size:20px;"><p>some text</p></span>'
+    )
+  })
+
   it('should work with headers', () => {
     assert.equal(
       render('# This is an <h1> tag\n## This is an <h2> tag\n###### This is an <h6> tag'),
@@ -74,7 +89,7 @@ describe('Markdown tests', () => {
   it('should work with images', () => {
     assert.equal(
       render('![GitHub Logo](/images/logo.png)\nFormat: ![Alt Text](url)'),
-      '<span><p><img alt="GitHub Logo" src="/images/logo.png">\nFormat: <img alt="Alt Text" src="url"></p></span>'
+      '<span><p><img alt="GitHub Logo" src="/images/logo.png"/>\nFormat: <img alt="Alt Text" src="url"/></p></span>'
     )
   })
 
@@ -109,21 +124,21 @@ describe('Markdown tests', () => {
   it('should work with indented code', () => {
     assert.equal(
       render('Indented code\n\n    // Some comments\n    line 1 of code\n    line 2 of code\n    line 3 of code'),
-      '<span><p>Indented code</p><pre>\n<code>// Some comments\nline 1 of code\nline 2 of code\nline 3 of code</code></pre></span>'
+      '<span><p>Indented code</p><pre><code>// Some comments\nline 1 of code\nline 2 of code\nline 3 of code</code></pre></span>'
     )
   })
 
   it('should work with block code', () => {
     assert.equal(
       render('Block code "fences"\n\n```\nSample text here...\n```\n'),
-      '<span><p>Block code &quot;fences&quot;</p><pre>\n<code>Sample text here...\n</code></pre></span>'
+      '<span><p>Block code &quot;fences&quot;</p><pre><code>Sample text here...\n</code></pre></span>'
     )
   })
 
   it('should work with highlighted code', () => {
     assert.equal(
       render('Syntax highlighting\n\n``` js\nvar foo = function (bar) {\n  return bar++;\n};\n\nconsole.log(foo(5));\n```'),
-      '<span><p>Syntax highlighting</p><pre>\n<code data-language="js">var foo = function (bar) {\n  return bar++;\n};\n\nconsole.log(foo(5));\n</code></pre></span>'
+      '<span><p>Syntax highlighting</p><pre><code data-language="js">var foo = function (bar) {\n  return bar++;\n};\n\nconsole.log(foo(5));\n</code></pre></span>'
     )
   })
 
