@@ -1,7 +1,7 @@
 'use strict'
 
 import markdown from 'markdown-it'
-import React, { PropTypes, Component } from 'react'
+import React, { PropTypes } from 'react'
 import isPlainObject from 'lodash/isPlainObject'
 import assign from 'lodash/assign'
 import reduce from 'lodash/reduce'
@@ -111,11 +111,16 @@ function convertTree (tokens, convertRules, options) {
 }
 
 function mdReactFactory (options = {}) {
-  const { onIterate, tags = DEFAULT_TAGS,
+  const {
+    onIterate,
+    tags = DEFAULT_TAGS,
     presetName, markdownOptions,
-    enableRules = [], disableRules = [], plugins = [],
+    enableRules = [],
+    disableRules = [],
+    plugins = [],
     onGenerateKey = (tag, index) => `mdrct-${tag}-${index}`,
-    className } = options
+    ...rootElementProps
+  } = options
 
   let md = markdown(markdownOptions || presetName)
     .enable(enableRules)
@@ -130,16 +135,20 @@ function mdReactFactory (options = {}) {
     md
   )
 
+  function renderChildren (tag) {
+    return tag !== 'img'
+  }
+
   function iterateTree (tree, level = 0, index = 0) {
     let tag = tree.shift()
     const key = onGenerateKey(tag, index)
 
-    const props = (tree.length && isPlainObject(tree[0]))
+    let props = (tree.length && isPlainObject(tree[0]))
       ? assign(tree.shift(), { key })
       : { key }
 
-    if (level === 0 && className) {
-      props.className = className
+    if (level === 0) {
+      props = { ...props, ...rootElementProps }
     }
 
     const children = tree.map(
@@ -160,7 +169,11 @@ function mdReactFactory (options = {}) {
 
     return (typeof onIterate === 'function')
       ? onIterate(tag, props, children, level)
-      : React.createElement(tag, props, children)
+      : React.createElement(
+        tag,
+        props,
+        renderChildren(tag) ? children : undefined
+      )
   }
 
   return function (text) {
@@ -169,25 +182,23 @@ function mdReactFactory (options = {}) {
   }
 }
 
-class MDReactComponent extends Component {
-  static propTypes = {
-    text: PropTypes.string.isRequired,
-    onIterate: PropTypes.func,
-    onGenerateKey: PropTypes.func,
-    tags: PropTypes.object,
-    presetName: PropTypes.string,
-    markdownOptions: PropTypes.object,
-    enableRules: PropTypes.array,
-    disableRules: PropTypes.array,
-    convertRules: PropTypes.object,
-    plugins: PropTypes.array,
-    className: PropTypes.string
-  };
+const MDReactComponent = (props) => {
+  const { text, ...others } = props
+  return mdReactFactory(others)(text)
+}
 
-  render () {
-    const { text, ...props } = this.props
-    return mdReactFactory(props)(text)
-  }
+MDReactComponent.propTypes = {
+  text: PropTypes.string.isRequired,
+  onIterate: PropTypes.func,
+  onGenerateKey: PropTypes.func,
+  tags: PropTypes.object,
+  presetName: PropTypes.string,
+  markdownOptions: PropTypes.object,
+  enableRules: PropTypes.array,
+  disableRules: PropTypes.array,
+  convertRules: PropTypes.object,
+  plugins: PropTypes.array,
+  className: PropTypes.string
 }
 
 export default MDReactComponent
