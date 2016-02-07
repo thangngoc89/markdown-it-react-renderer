@@ -2,15 +2,15 @@
 
 Markdown to React Component converter.
 
-This project uses Markdown parser from [Markdown It](https://github.com/markdown-it/markdown-it) library, but loosely supports its plugins.
-
-**DEMO**: http://alexkuz.github.io/markdown-react-js/
+This project uses Markdown parser from
+[Markdown It](https://github.com/markdown-it/markdown-it)
+library, but loosely supports its plugins.
 
 ## Examples
 
 #### Basic example
 
-```
+```js
 import MDReactComponent from 'markdown-react-js';
 
 ...
@@ -24,7 +24,7 @@ render() {
 
 or, using function instead of component:
 
-```
+```js
 import { mdReact } from 'markdown-react-js';
 
 ...
@@ -36,7 +36,7 @@ render() {
 
 Result:
 
-```
+```html
 <span>
   <p>
     Some text with <strong>emphasis</strong>.
@@ -46,7 +46,7 @@ Result:
 
 #### Using custom tags
 
-```
+```js
 const TAGS = {
   html: 'span', // root node, replaced by default
   strong: 'b',
@@ -64,7 +64,7 @@ render() {
 
 Result:
 
-```
+```html
 <span>
   <p>
     Some <b>bold</b> and <i>italic</i> text.
@@ -75,7 +75,7 @@ Result:
 
 #### Using custom component renderer
 
-```
+```js
 function handleIterate(Tag, props, children, level) {
   if (level === 1) {
     props = {
@@ -83,7 +83,7 @@ function handleIterate(Tag, props, children, level) {
       className: 'first-level-class'
     };
   }
-  
+
   if (Tag === 'a') {
     props = {
       ...props,
@@ -91,7 +91,7 @@ function handleIterate(Tag, props, children, level) {
       href: props.href.replace('SOME_URL', 'http://example.com')
     };
   }
-  
+
   return <Tag {...props}>{children}</Tag>;
 }
 
@@ -106,7 +106,7 @@ render() {
 
 Result:
 
-```
+```html
 <span>
   <p class="first-level-class">
     <a href="http://example.com" class="link-class">This link</a> has it’s own style.
@@ -115,10 +115,14 @@ Result:
 
 ```
 
-### Copyright
+# Copyright
 
-Copyright 2015, Alexander Kuznetsov &lt;alexkuz@gmail.com&gt;
+Forked from
+- [markdown-react-js](https://github.com/alexkuz/markdown-react-js)
+Copyright 2015 Alexander Kuznetsov <alexkuz@gmail.com>
 
-Markdown-It:
+- Markdown-it
+Copyright (c) 2014 Vitaly Puzrin <vitaly@rcdesign.ru>, Alex Kocharin <alex@kocharin.ru>
 
-Copyright (c) 2014 Vitaly Puzrin &lt;vitaly@rcdesign.ru&gt;, Alex Kocharin &lt;alex@kocharin.ru&gt;
+# LICENSE
+MIT

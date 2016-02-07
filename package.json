@@ -1,7 +1,7 @@
 {
-  "name": "markdown-react-js",
-  "version": "0.3.0",
-  "description": "Markdown to React Component converter",
+  "name": "markdown-it-react-renderer",
+  "version": "0.1.0",
+  "description": "React renderer for Markdown-it",
   "main": "lib/index.js",
   "scripts": {
     "test": "NODE_ENV=test babel-node ./node_modules/.bin/isparta cover _mocha --reporter spec --timeout 3000",
@@ -60,16 +60,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/alexkuz/markdown-react-js"
+    "url": "https://github.com/thangngoc89/markdown-it-react-renderer"
   },
   "keywords": [
     "markdown",
     "react"
   ],
-  "author": "Alexander <alexkuz@gmail.com> (http://kuzya.org/)",
+  "author": "Khoa Nguyen <hi@khoanguyen.me> (http://khoanguyen.me/)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/alexkuz/markdown-react-js/issues"
+    "url": "https://github.com/thangngoc89/markdown-it-react-renderer/issues"
   },
-  "homepage": "https://github.com/alexkuz/markdown-react-js"
+  "homepage": "https://github.com/thangngoc89/markdown-it-react-renderer"
 }
