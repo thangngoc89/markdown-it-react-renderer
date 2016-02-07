@@ -4,8 +4,8 @@
   "description": "React renderer for Markdown-it",
   "main": "lib/index.js",
   "scripts": {
-    "test": "NODE_ENV=test babel-node ./node_modules/.bin/isparta cover _mocha --reporter spec --timeout 3000",
-    "test:dev": "NODE_ENV=test mocha --compilers js:babel-core/register --recursive --reporter spec --timeout 3000 --watch",
+    "test": "NODE_ENV=test babel-node ./node_modules/.bin/isparta cover _mocha",
+    "test:dev": "NODE_ENV=test mocha --compilers js:babel-core/register --watch",
     "codecov": "cat coverage/lcov.info | codecov",
     "dist": "NODE_ENV=production webpack -p",
     "build": "babel src --out-dir lib",
