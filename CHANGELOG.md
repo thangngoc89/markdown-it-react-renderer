@@ -1,3 +1,7 @@
+### Under the hood
+
+- Break up tests into files
+
 # 0.1.1 - 2016-02-07
 
 - Fixed: Remove warning about void tag with children

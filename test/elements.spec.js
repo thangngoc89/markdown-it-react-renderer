@@ -1,47 +1,6 @@
-'use strict'
-
 import { assert } from 'chai'
 import { describe, it } from 'mocha'
-import { mdReact } from '../src/index'
-import React from 'react'
-import { renderToStaticMarkup } from 'react-dom/server'
-import update from 'react/lib/update'
-
-const plugins = {
-  abbr: require('markdown-it-abbr'),
-  container: require('markdown-it-container'),
-  deflist: require('markdown-it-deflist'),
-  emoji: require('markdown-it-emoji'),
-  footnote: require('markdown-it-footnote'),
-  ins: require('markdown-it-ins'),
-  mark: require('markdown-it-mark'),
-  sub: require('markdown-it-sub'),
-  sup: require('markdown-it-sup')
-}
-
-function render (text, options) {
-  return renderToStaticMarkup(mdReact(options)(text))
-}
-
-function linkCallback (tag, props, children) {
-  if (tag === 'a') {
-    props = update(props, {
-      className: { $set: 'link-class' },
-      href: { $apply: h => h.replace('SOME_URL', 'http://real-url.com') }
-    })
-  }
-  return React.createElement(tag, props, children)
-}
-
-function firstLevelCallback (tag, props, children, level) {
-  if (level === 1) {
-    props = update(props, {
-      className: { $set: 'first-level-class' }
-    })
-  }
-
-  return React.createElement(tag, props, children)
-}
+import render from './helpers/render'
 
 describe('Markdown tests', () => {
   it('should set root element class to value in className property', () => {
@@ -162,51 +121,6 @@ describe('Markdown tests', () => {
       render('## Typographic replacements\n\nEnable typographer option to see result.\n\n(c) (C) (r) (R) (tm) (TM) (p) (P) +-\n\ntest.. test... test..... test?..... test!....\n\n!!!!!! ???? ,,  -- ---\n\n"Smartypants, double quotes" and \'single quotes\'',
         {markdownOptions: {typographer: false}}),
       '<span><h2>Typographic replacements</h2><p>Enable typographer option to see result.</p><p>(c) (C) (r) (R) (tm) (TM) (p) (P) +-</p><p>test.. test... test..... test?..... test!....</p><p>!!!!!! ???? ,,  -- ---</p><p>&quot;Smartypants, double quotes&quot; and &#x27;single quotes&#x27;</p></span>'
-    )
-  })
-})
-
-describe('Markdown plugins', () => {
-  it('should work with emoji', () => {
-    assert.equal(
-      render(':) 8-)',
-        {plugins: [plugins.emoji]}),
-      '<span><p>😃 😎</p></span>'
-    )
-  })
-
-  it('should work with container', () => {
-    assert.equal(
-      render('::: warning\n*here be dragons*\n:::',
-        {plugins: [{plugin: plugins.container, args: ['warning']}]}),
-      '<span><div data-info="warning"><p><em>here be dragons</em></p></div></span>'
-    )
-  })
-
-  /* TODO: footnote and other plugins */
-})
-
-// Markdown-React
-
-describe('Markdown-React options tests', () => {
-  it('should render tags with custom props', () => {
-    assert.equal(
-      render('Here is [some link with class](SOME_URL).', { onIterate: linkCallback }),
-      '<span><p>Here is <a href="http://real-url.com" class="link-class">some link with class</a>.</p></span>'
-    )
-  })
-
-  it('should distinct tags depending on level', () => {
-    assert.equal(
-      render('This node has custom class, **but not this node**.', { onIterate: firstLevelCallback }),
-      '<span><p class="first-level-class">This node has custom class, <strong>but not this node</strong>.</p></span>'
-    )
-  })
-
-  it('should replace tags', () => {
-    assert.equal(
-      render('This text uses **“i” and “b” tags** instead of *“em” and “strong” tags*.', {tags: { 'html': 'span', 'em': 'i', 'strong': 'b' }}),
-      '<span><p>This text uses <b>“i” and “b” tags</b> instead of <i>“em” and “strong” tags</i>.</p></span>'
     )
   })
 })
