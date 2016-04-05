@@ -1,4 +1,4 @@
-# Markdown React
+# Markdown React [![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
 
 Markdown to React Component converter.
 
