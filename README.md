@@ -117,7 +117,7 @@ Result:
 
 # Copyright
 
-Forked from
+Forked from:
 - [markdown-react-js](https://github.com/alexkuz/markdown-react-js)
 Copyright 2015 Alexander Kuznetsov <alexkuz@gmail.com>
 - Markdown-it
