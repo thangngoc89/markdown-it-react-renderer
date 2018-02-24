@@ -13,7 +13,7 @@ library, but loosely supports its plugins.
 ```js
 import MDReactComponent from 'markdown-react-js';
 
-...
+// ...
 
 render() {
   return (
@@ -27,7 +27,7 @@ or, using function instead of component:
 ```js
 import { mdReact } from 'markdown-react-js';
 
-...
+// ...
 
 render() {
   return mdReact()('Some text **with emphasis**.');
@@ -117,10 +117,9 @@ Result:
 
 # Copyright
 
-Forked from
+Forked from:
 - [markdown-react-js](https://github.com/alexkuz/markdown-react-js)
 Copyright 2015 Alexander Kuznetsov <alexkuz@gmail.com>
-
 - Markdown-it
 Copyright (c) 2014 Vitaly Puzrin <vitaly@rcdesign.ru>, Alex Kocharin <alex@kocharin.ru>
 
