@@ -120,7 +120,6 @@ Result:
 Forked from
 - [markdown-react-js](https://github.com/alexkuz/markdown-react-js)
 Copyright 2015 Alexander Kuznetsov <alexkuz@gmail.com>
-
 - Markdown-it
 Copyright (c) 2014 Vitaly Puzrin <vitaly@rcdesign.ru>, Alex Kocharin <alex@kocharin.ru>
 
