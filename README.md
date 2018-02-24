@@ -13,7 +13,7 @@ library, but loosely supports its plugins.
 ```js
 import MDReactComponent from 'markdown-react-js';
 
-...
+// ...
 
 render() {
   return (
@@ -27,7 +27,7 @@ or, using function instead of component:
 ```js
 import { mdReact } from 'markdown-react-js';
 
-...
+// ...
 
 render() {
   return mdReact()('Some text **with emphasis**.');
